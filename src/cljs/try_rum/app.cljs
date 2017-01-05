@@ -1,19 +1,17 @@
 (ns try-rum.app
-    (:require
-      [rum.core   :as rum]
-      [rum.mdl    :as mdl]
-      [try-rum.db :as db]))
+  (:require
+    [rum.core   :as rum]
+    [rum.mdl    :as mdl]
+    [try-rum.db :as db]
+    [try-rum.ui :as ui]))
 
 (def counts (db/sync (atom 0)))
 
-(rum/defc counter < rum/reactive
+(rum/defc app < rum/reactive
   []
-  [:div
-    (mdl/button
-      { :on-click db/increment
-        :mdl [:fab :colored]}
-      (mdl/icon "add"))
-    [:h1 (rum/react counts)]])
+  [:div {:style {:padding 30}}
+   (ui/card (rum/react counts) db/increment)])
+
 
 (defn init []
-  (rum/mount (counter) (. js/document (getElementById "container"))))
+  (rum/mount (app) (. js/document (getElementById "container"))))
