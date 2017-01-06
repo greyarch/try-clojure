@@ -1,8 +1,8 @@
-(ns try-rum.db
+(ns try-clojure.db
     (:require
       [matchbox.core :as m]))
 
-(def root (m/connect "https://examiner-598ae.firebaseio.com"))
+(def root (m/connect "https://try-clojure.firebaseio.com"))
 (m/auth-anon root)
 (def path [:counter :current])
 (def curr-counter (m/get-in root path))

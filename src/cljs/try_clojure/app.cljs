@@ -1,9 +1,9 @@
-(ns try-rum.app
+(ns try-clojure.app
   (:require
     [rum.core   :as rum]
     [rum.mdl    :as mdl]
-    [try-rum.db :as db]
-    [try-rum.ui :as ui]))
+    [try-clojure.db :as db]
+    [try-clojure.ui :as ui]))
 
 (def counts (db/sync (atom 0)))
 

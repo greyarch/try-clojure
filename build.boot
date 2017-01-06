@@ -20,7 +20,6 @@
 
 (deftask build []
   (comp (speak)
-
         (cljs)))
 
 
@@ -37,7 +36,7 @@
 
 (deftask development []
   (task-options! cljs {:optimizations :none :source-map true}
-                 reload {:on-jsload 'try-rum.app/init})
+                 reload {:on-jsload 'try-clojure.app/init})
   identity)
 
 (deftask dev

@@ -1,4 +1,4 @@
-(ns try-rum.ui
+(ns try-clojure.ui
   (:require
     [rum.core :as rum]
     [rum.mdl  :as mdl]))
