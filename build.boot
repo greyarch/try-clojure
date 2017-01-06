@@ -44,3 +44,10 @@
   []
   (comp (development)
         (run)))
+
+(deftask prod
+  "Build app for production deployment"
+  []
+  (comp (production)
+        (build)
+        (target)))
