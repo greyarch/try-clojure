@@ -11,6 +11,7 @@
                  [org.clojure/clojurescript "1.9.293"]
                  [rum "0.10.7"]
                  [rum-mdl "0.2.1"]
+                 [markdown-clj "0.9.91"]
                  [matchbox "0.0.9"]])
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
