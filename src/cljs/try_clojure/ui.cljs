@@ -16,15 +16,11 @@
     (mdl/card-title title)
     (mdl/card-menu
       [:span
-            (mdl/button { :mdl [:icon :ripple :color--grey-200]
-                          :key (str "remove-btn-" title)
-                          :on-click dec-fn}
-                (mdl/icon "remove"))
-            (mdl/button { :mdl [:icon :ripple :color--grey-200]
-                          :key (str "add-btn-" title)
-                          :style {:margin-left 5}
-                          :on-click inc-fn}
-                (mdl/icon "add"))])
+        (mdl/button { :mdl [:icon :ripple :color--grey-200]
+                      :on-click dec-fn} (mdl/icon "remove"))
+        (mdl/button { :mdl [:icon :ripple :color--grey-200]
+                      :style {:margin-left 5}
+                      :on-click inc-fn} (mdl/icon "add"))])
     (mdl/card-text
       [:h3
         (if counter
