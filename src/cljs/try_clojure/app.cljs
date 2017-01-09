@@ -18,13 +18,16 @@
 (defn dec! [path]
   (fn [] (db/dec! root path)))
 
-(rum/defc app < rum/reactive
+(rum/defc counter-card < rum/reactive
+  [title cursor path]
+  (ui/counter-card title
+    (rum/react cursor) (inc! path) (dec! path)))
+
+(rum/defc app < rum/static
   []
   [:div {:style {:padding 30}}
-    (ui/counter-card "A counter"
-      (rum/react current-count) (inc! current-path) (dec! current-path))
-    (ui/counter-card "Another counter"
-      (rum/react next-count) #(inc! next-path) #(dec! next-path))])
+    (counter-card "A counter" current-count current-path)
+    (counter-card "Another counter" next-count next-path)])
 
 
 (defn init []
