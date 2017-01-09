@@ -16,8 +16,8 @@
   [title cursor path]
   (ui/counter-card title
     (rum/react cursor)
-    #(db/swap! root path dec)
-    #(db/swap! root path inc)))
+    #(db/swap! root path inc)
+    #(db/swap! root path dec)))
 
 (rum/defc app < rum/static
   []
