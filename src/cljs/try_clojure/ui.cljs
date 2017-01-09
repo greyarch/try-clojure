@@ -23,16 +23,3 @@
     (mdl/card-text
       (markdown
         "This is a simple counter backed by [Firebase](https://firebase.google.com). Click on the **plus** button to increment the counter."))))
-
-
-(rum/defc sample-component < rum/static
-  []
-  (mdl/card
-    {:mdl [:shadow--2dp] :style {:margin-top 30}}
-    (mdl/card-title "This is a sample component")
-    (mdl/card-text
-      [:div
-         {:style {:padding-top 30}}
-         (mdl/checkbox
-           {:mdl [:ripple], :for "checkbox-1", :input {:id "checkbox-1"}, :label "Checkbox"})
-         (mdl/switch {:mdl [:ripple], :for "switch-2", :input {:id "switch-2"}} :title "Switch")])))
