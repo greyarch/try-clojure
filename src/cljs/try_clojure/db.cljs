@@ -22,3 +22,8 @@
   [root path]
   (let [cursor (m/get-in root path)]
     (m/swap! cursor inc)))
+
+(defn dec!
+  [root path]
+  (let [cursor (m/get-in root path)]
+    (m/swap! cursor dec)))
