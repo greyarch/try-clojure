@@ -2,17 +2,23 @@
     (:require
       [matchbox.core :as m]))
 
-(def root (m/connect "https://try-clojure.firebaseio.com"))
-(m/auth-anon root)
-(def path [:counter :current])
-(def curr-counter (m/get-in root path))
+(defn connect
+  [url]
+  (let [root (m/connect url)]
+    (m/auth-anon root)
+    root))
 
-(defn sync [store]
-  (m/listen-children
-    root [:counter]
-    (fn [[event-type data]]
-      (swap! store #(second data))))
+(defn sync
+  [store root path]
+  (let [cursor (m/get-in root path)]
+    (m/listen-to
+      cursor :value
+      (fn [[event-type data]]
+        (if data
+          (reset! store data)))))
   store)
 
-(defn increment []
-  (m/swap! curr-counter inc))
+(defn inc!
+  [root path]
+  (let [cursor (m/get-in root path)]
+    (m/swap! cursor inc)))
