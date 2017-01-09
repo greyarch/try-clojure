@@ -12,16 +12,12 @@
 (def current-count (rum/cursor-in state current-path))
 (def next-count (rum/cursor-in state next-path))
 
-(defn inc! [path]
-  (fn [] (db/inc! root path)))
-
-(defn dec! [path]
-  (fn [] (db/dec! root path)))
-
 (rum/defc counter-card < rum/reactive
   [title cursor path]
   (ui/counter-card title
-    (rum/react cursor) (inc! path) (dec! path)))
+    (rum/react cursor)
+    #(db/swap! root path dec)
+    #(db/swap! root path inc)))
 
 (rum/defc app < rum/static
   []
