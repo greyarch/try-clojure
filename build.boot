@@ -8,16 +8,19 @@
                  [com.cemerick/piggieback   "0.2.1"      :scope "test"]
                  [org.clojure/tools.nrepl   "0.2.12"     :scope "test"]
                  [weasel                    "0.7.0"      :scope "test"]
+                 [crisptrutski/boot-cljs-test "0.3.0"    :scope "test"]
                  [org.clojure/clojurescript "1.9.293"]
                  [rum "0.10.7"]
                  [rum-mdl "0.2.1"]
                  [markdown-clj "0.9.91"]
                  [matchbox "0.0.9"]])
+
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
  '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
  '[adzerk.boot-reload    :refer [reload]]
- '[pandeiro.boot-http    :refer [serve]])
+ '[pandeiro.boot-http    :refer [serve]]
+ '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
 (deftask build []
   (comp (speak)
@@ -46,9 +49,26 @@
   (comp (development)
         (run)))
 
-(deftask prod
+(deftask build-prod
   "Build app for production deployment"
   []
   (comp (production)
         (build)
         (target)))
+
+
+(deftask testing []
+  (set-env! :source-paths #(conj % "test/cljs"))
+  identity)
+
+(ns-unmap 'boot.user 'test)
+
+(deftask test []
+  (comp (testing)
+        (test-cljs :js-env :slimer
+                   :exit?  true)))
+
+(deftask auto-test []
+  (comp (testing)
+        (watch)
+        (test-cljs :js-env :slimer)))
