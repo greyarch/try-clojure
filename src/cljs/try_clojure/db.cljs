@@ -18,7 +18,7 @@
           (reset! store data)))))
   store)
 
-(defn swap!
+(defn update!
   [root path func]
   (let [cursor (m/get-in root path)]
     (m/swap! cursor func)))
