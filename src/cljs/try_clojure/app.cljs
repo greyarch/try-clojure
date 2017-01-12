@@ -5,25 +5,21 @@
     [try-clojure.db :as db]
     [try-clojure.ui :as ui]))
 
-(def current-path [:counter :current])
-(def next-path [:counter :next])
-(def root (db/connect "https://try-clojure.firebaseio.com"))
+(def root (db/connect "https://try-clojure.firebaseio.com/counter"))
 (def state (db/sync (atom {}) root []))
-(def current-count (rum/cursor-in state current-path))
-(def next-count (rum/cursor-in state next-path))
 
 (rum/defc counter-card < rum/reactive
-  [title cursor path]
+  [title path]
   (ui/counter-card title
-    (rum/react cursor)
+    (rum/react (rum/cursor-in state path))
     #(db/update! root path inc)
     #(db/update! root path dec)))
 
 (rum/defc app < rum/static
   []
   [:div {:style {:padding 30}}
-    (counter-card "A counter" current-count current-path)
-    (counter-card "Another counter" next-count next-path)])
+    (counter-card "A counter" [:current])
+    (counter-card "Another counter" [:next])])
 
 
 (defn init []
