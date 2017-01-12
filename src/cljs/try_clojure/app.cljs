@@ -1,7 +1,6 @@
 (ns try-clojure.app
   (:require
     [rum.core   :as rum]
-    [rum.mdl    :as mdl]
     [try-clojure.db :as db]
     [try-clojure.ui :as ui]))
 
