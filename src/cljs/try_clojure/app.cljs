@@ -4,8 +4,8 @@
     [try-clojure.db :as db]
     [try-clojure.ui :as ui]))
 
-(def root (db/connect "https://try-clojure.firebaseio.com/counter"))
-(def state (db/sync (atom {}) root []))
+(defonce root (db/connect "https://try-clojure.firebaseio.com/counter"))
+(defonce state (db/sync (atom {}) root []))
 
 (rum/defc counter-card < rum/reactive
   [title path]
